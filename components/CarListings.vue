@@ -20,6 +20,7 @@ import car1 from '@/static/car1.png';
 import car2 from '@/static/car2.png';
 import car3 from '@/static/car3.png';
 
+
 export default {
   data() {
     return {
@@ -27,6 +28,9 @@ export default {
         { id: 1, name: 'Tesla Model S', price: '$60,000', image: car1 },
         { id: 2, name: 'BMW X5', price: '$50,000', image: car2 },
         { id: 3, name: 'Audi A6', price: '$40,000', image: car3 },
+        { id: 4, name: 'Mercedes Benz', price: '$70,000', image: car1 },
+        { id: 5, name: 'Toyota Camry', price: '$30,000', image: car2 },
+        { id: 6, name: 'Honda Accord', price: '$25,000', image: car3 },
       ],
     };
   },
