@@ -1,4 +1,10 @@
 <template>
+
+   <button @click="toggleDarkMode" class="p-2 bg-gray-200 dark:bg-gray-700 rounded">
+    <span v-if="isDarkMode">🌙</span>
+    <span v-else>☀️</span>
+  </button>
+
   <header
     :class="[
       'bg-gray-800 text-white fixed top-0 left-0 w-full z-50 transition-transform duration-300 ease-in-out',
@@ -8,13 +14,15 @@
     <nav class="flex justify-between items-center container mx-auto p-4 md:p-6">
       <div class="text-xl font-bold">CarSell</div>
       <ul class="flex space-x-10">
-        <li><a href="#" class="hover:text-gray-400">Home</a></li>
-        <li><a href="#" class="hover:text-gray-400">About</a></li>
-        <li><a href="#" class="hover:text-gray-400">Contact</a></li>
-        <li><a href="#" class="hover:text-gray-400">Login</a></li>
+        <li><nuxt-link to="/" class="hover:text-gray-400">Home</nuxt-link></li>
+        <li><nuxt-link to="/about" class="hover:text-gray-400">About</nuxt-link></li>
+        <li><nuxt-link to="/contact" class="hover:text-gray-400">Contact</nuxt-link></li>
+        <li><nuxt-link to="/login" class="hover:text-gray-400">Login</nuxt-link></li>
       </ul>
     </nav>
+    
   </header>
+  
 </template>
 
 <script>
@@ -48,6 +56,34 @@ export default {
 
       // Update the last scroll position
       this.lastScrollPosition = currentScrollPosition;
+    },
+  },
+};
+</script>
+
+<script>
+export default {
+  data() {
+    return {
+      isDarkMode: false,
+    };
+  },
+  mounted() {
+    this.isDarkMode = localStorage.theme === 'dark' || (!('theme' in localStorage) && window.matchMedia('(prefers-color-scheme: dark)').matches);
+    if (this.isDarkMode) {
+      document.documentElement.classList.add('dark');
+    }
+  },
+  methods: {
+    toggleDarkMode() {
+      this.isDarkMode = !this.isDarkMode;
+      if (this.isDarkMode) {
+        document.documentElement.classList.add('dark');
+        localStorage.theme = 'dark';
+      } else {
+        document.documentElement.classList.remove('dark');
+        localStorage.theme = 'light';
+      }
     },
   },
 };
